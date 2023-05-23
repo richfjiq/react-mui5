@@ -1,11 +1,15 @@
 import { BrowserRouter } from 'react-router-dom';
+
 import { AppRouter } from './Router';
+import { NotificationProvider } from './context';
 
 function App() {
   return (
-    <BrowserRouter>
-      <AppRouter />
-    </BrowserRouter>
+    <NotificationProvider>
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
+    </NotificationProvider>
   );
 }
 
