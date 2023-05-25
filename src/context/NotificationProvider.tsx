@@ -23,8 +23,15 @@ export const NotificationProvider = ({ children }: props) => {
     setSeverity('error');
   };
 
+  const getSuccess = (msg: string) => {
+    setSeverity('success');
+    setOpen(true);
+    setMsg(msg);
+  };
+
   const value = {
     getError,
+    getSuccess,
   };
 
   return (
