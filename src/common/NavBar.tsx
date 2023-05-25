@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import {
   AppBar,
   Box,
@@ -8,12 +9,14 @@ import {
   Toolbar,
   Typography,
 } from '@mui/material';
-import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="fixed">
+      <AppBar position="sticky">
         <Toolbar>
           <Container maxWidth="xl">
             <Grid
@@ -27,7 +30,9 @@ export const NavBar: FC = () => {
               </Grid>
               <Grid item>
                 <Stack spacing={2} direction="row">
-                  <Button variant="contained">Login</Button>
+                  <Button variant="contained" onClick={() => navigate('login')}>
+                    Login
+                  </Button>
                   <Button variant="outlined">Register</Button>
                 </Stack>
               </Grid>
