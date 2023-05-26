@@ -1,20 +1,25 @@
-import { FC, useEffect } from 'react';
-import { Button, Container } from '@mui/material';
+import { FC, useEffect, useState } from 'react';
+import { Button, Container, Grid } from '@mui/material';
 
 import { Header } from '../components';
 import { characters } from '../api';
+import { CharacterCard } from './';
+import { Character } from '../types';
 
 export const Home: FC = () => {
+  const [data, setData] = useState<Character[]>([]);
   useEffect(() => {
     characters
-      .getById({ id: 1 })
+      .getAll({ page: 1 })
       .then((res) => {
-        console.log(res.data);
+        setData(res.data.results);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+  console.log({ data });
 
   return (
     <Container sx={{ mt: 9 }} maxWidth="xl">
@@ -27,6 +32,18 @@ export const Home: FC = () => {
           </Button>
         }
       />
+      <Grid container spacing={2} direction="row">
+        {data.map(({ image, name, species, status }) => (
+          <Grid item xs={3}>
+            <CharacterCard
+              image={image}
+              name={name}
+              species={species}
+              status={status}
+            />
+          </Grid>
+        ))}
+      </Grid>
     </Container>
   );
 };
