@@ -14,15 +14,15 @@ import {
 
 export const CharacterPage: FC = () => {
   const { id } = useParams();
-  const [loading, setLoading] = useState(true);
   const [character, setCharacter] = useState<Character>();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     characters
       .getById({ id })
       .then((res) => {
-        setLoading(false);
         setCharacter(res.data);
+        setTimeout(() => setLoading(false), 1000);
       })
       .catch((e) => {
         console.log(e);
@@ -32,7 +32,7 @@ export const CharacterPage: FC = () => {
   console.log(character);
 
   const renderData = () => {
-    if (!loading) {
+    if (loading) {
       return (
         <Box
           sx={{
@@ -47,20 +47,25 @@ export const CharacterPage: FC = () => {
       );
     }
 
-    const { image, name, origin, status } = character as Character;
-
     return (
       <Grid sx={{ mt: 2 }} container columnSpacing={2}>
         <Grid item xs={6}>
-          <Typography variant="h1">{name}</Typography>
+          <Typography variant="h1">{character?.name}</Typography>
           <Divider />
-          <Typography variant="h6">{origin.name}</Typography>
+          <Typography variant="h6">{character?.origin.name}</Typography>
           <Box sx={{ mt: 2 }}>
-            <Chip color="primary" variant="outlined" label={status} />
+            <Chip
+              color="primary"
+              variant="outlined"
+              label={character?.status}
+            />
           </Box>
         </Grid>
         <Grid item xs={6}>
-          <img src={image} style={{ width: '100%', borderRadius: '0.5rem' }} />
+          <img
+            src={character?.image}
+            style={{ width: '100%', borderRadius: '0.5rem' }}
+          />
         </Grid>
       </Grid>
     );

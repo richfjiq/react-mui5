@@ -8,12 +8,14 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 type CardProps = {
   image: string;
   name: string;
   species: string;
   status: string;
+  id: string;
 };
 
 export const CharacterCard: FC<CardProps> = ({
@@ -21,7 +23,10 @@ export const CharacterCard: FC<CardProps> = ({
   name,
   species,
   status,
+  id,
 }) => {
+  const navigate = useNavigate();
+
   return (
     <Card>
       <CardMedia component="img" height="194" image={image} alt="logo vite" />
@@ -34,8 +39,16 @@ export const CharacterCard: FC<CardProps> = ({
         <Typography sx={{ mt: 2 }}>Status: {status}</Typography>
       </CardContent>
       <CardActions>
-        <Button variant="contained" size="small">
+        <Button
+          fullWidth
+          variant="contained"
+          size="small"
+          onClick={() => navigate(`/character/${id}`)}
+        >
           Learn More
+        </Button>
+        <Button fullWidth variant="outlined" size="small">
+          Add to cart
         </Button>
       </CardActions>
     </Card>

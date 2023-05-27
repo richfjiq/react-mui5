@@ -1,14 +1,17 @@
 import { FC } from 'react';
 import {
   AppBar,
+  Badge,
   Box,
   Button,
   Container,
   Grid,
+  IconButton,
   Stack,
   Toolbar,
   Typography,
 } from '@mui/material';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useNavigate } from 'react-router-dom';
 
 export const NavBar: FC = () => {
@@ -30,6 +33,14 @@ export const NavBar: FC = () => {
               </Grid>
               <Grid item>
                 <Stack spacing={2} direction="row">
+                  <IconButton
+                    color="primary"
+                    // onClick={() => handleStateViewDrawer()}
+                  >
+                    <Badge color="error">
+                      <ShoppingCartOutlinedIcon />
+                    </Badge>
+                  </IconButton>
                   <Button variant="contained" onClick={() => navigate('login')}>
                     Login
                   </Button>

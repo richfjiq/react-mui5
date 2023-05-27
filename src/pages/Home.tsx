@@ -58,13 +58,14 @@ export const Home: FC = () => {
     return (
       <>
         <Grid container spacing={2} direction="row">
-          {data.map(({ image, name, species, status }) => (
+          {data.map(({ image, name, species, status, id }) => (
             <Grid item xs={3}>
               <CharacterCard
                 image={image}
                 name={name}
                 species={species}
                 status={status}
+                id={id.toString()}
               />
             </Grid>
           ))}
