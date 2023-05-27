@@ -1,3 +1,3 @@
-export * from './CharacterCard';
+export * from './Character';
 export * from './Home';
 export * from './Login';

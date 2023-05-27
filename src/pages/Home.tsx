@@ -8,9 +8,8 @@ import {
   Pagination,
 } from '@mui/material';
 
-import { Header } from '../components';
+import { CharacterCard, Header } from '../components';
 import { characters } from '../api';
-import { CharacterCard } from './';
 import { Character } from '../types';
 
 export const Home: FC = () => {
@@ -20,6 +19,7 @@ export const Home: FC = () => {
   const [count, setCount] = useState(1);
 
   const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+    event.preventDefault();
     setPage(value);
   };
 
