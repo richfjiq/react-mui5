@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import {
   AppBar,
   Badge,
@@ -13,9 +13,15 @@ import {
 } from '@mui/material';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useNavigate } from 'react-router-dom';
+import { Cart } from '.';
 
 export const NavBar: FC = () => {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+
+  const handleStateViewDrawer = () => {
+    setOpen((state) => !state);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -35,7 +41,7 @@ export const NavBar: FC = () => {
                 <Stack spacing={2} direction="row">
                   <IconButton
                     color="primary"
-                    // onClick={() => handleStateViewDrawer()}
+                    onClick={() => handleStateViewDrawer()}
                   >
                     <Badge color="error">
                       <ShoppingCartOutlinedIcon />
@@ -51,6 +57,7 @@ export const NavBar: FC = () => {
           </Container>
         </Toolbar>
       </AppBar>
+      <Cart open={open} handleStateViewDrawer={handleStateViewDrawer} />
     </Box>
   );
 };
