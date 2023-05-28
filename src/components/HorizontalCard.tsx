@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import { useCart } from '../store';
 
 interface CardHorizontalComponentProps {
   id: string | number;
@@ -24,9 +25,12 @@ export const HorizontalCardComponent: FC<CardHorizontalComponentProps> = ({
   name,
   info,
 }) => {
+  const { removeFromCart } = useCart();
+
   const handleRemoveToCart = () => {
-    // dispatch(removeToCart({ id }));
+    removeFromCart(id);
   };
+
   return (
     <Card sx={{ display: 'flex', my: 2 }}>
       <CardMedia

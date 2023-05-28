@@ -1,6 +1,9 @@
 import { shallowEqual } from 'react-redux';
 import { RootState, useAppDispatch, useAppSelector } from '../';
-import { addToCart as addToCartAction } from './actions';
+import {
+  addToCart as addToCartAction,
+  removeFromCart as removeFromCartAction,
+} from './actions';
 import { useCallback } from 'react';
 import { Cart } from './reducer';
 
@@ -18,8 +21,15 @@ export const useCart = () => {
     [dispatch]
   );
 
+  const removeFromCart = useCallback(
+    (id: number | string) => {
+      dispatch(removeFromCartAction(id));
+    },
+    [dispatch]
+  );
   return {
     ...cartState,
     addToCart,
+    removeFromCart,
   };
 };

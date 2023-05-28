@@ -14,10 +14,12 @@ import {
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import { useNavigate } from 'react-router-dom';
 import { Cart } from '.';
+import { useCart } from '../store';
 
 export const NavBar: FC = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { count } = useCart();
 
   const handleStateViewDrawer = () => {
     setOpen((state) => !state);
@@ -43,7 +45,7 @@ export const NavBar: FC = () => {
                     color="primary"
                     onClick={() => handleStateViewDrawer()}
                   >
-                    <Badge color="error">
+                    <Badge color="error" badgeContent={count}>
                       <ShoppingCartOutlinedIcon />
                     </Badge>
                   </IconButton>
