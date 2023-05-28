@@ -29,8 +29,6 @@ export const CharacterPage: FC = () => {
       });
   }, [id]);
 
-  console.log(character);
-
   const renderData = () => {
     if (loading) {
       return (

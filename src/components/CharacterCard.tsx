@@ -9,6 +9,7 @@ import {
   Typography,
 } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../store';
 
 type CardProps = {
   image: string;
@@ -26,6 +27,18 @@ export const CharacterCard: FC<CardProps> = ({
   id,
 }) => {
   const navigate = useNavigate();
+  const { addToCart, cart } = useCart();
+
+  const disabled = !!cart.find((item) => item.id === id);
+
+  const addToCartHandler = () => {
+    addToCart({
+      id,
+      name,
+      image,
+      info: status,
+    });
+  };
 
   return (
     <Card>
@@ -47,7 +60,13 @@ export const CharacterCard: FC<CardProps> = ({
         >
           Learn More
         </Button>
-        <Button fullWidth variant="outlined" size="small">
+        <Button
+          fullWidth
+          variant="outlined"
+          size="small"
+          onClick={addToCartHandler}
+          disabled={disabled}
+        >
           Add to cart
         </Button>
       </CardActions>

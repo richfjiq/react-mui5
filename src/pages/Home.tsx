@@ -37,8 +37,6 @@ export const Home: FC = () => {
       });
   }, [page]);
 
-  console.log({ data });
-
   const renderCards = () => {
     if (loading) {
       return (
@@ -59,7 +57,7 @@ export const Home: FC = () => {
       <>
         <Grid container spacing={2} direction="row">
           {data.map(({ image, name, species, status, id }) => (
-            <Grid item xs={3}>
+            <Grid item xs={3} key={id.toString()}>
               <CharacterCard
                 image={image}
                 name={name}
