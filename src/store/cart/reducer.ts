@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { addToCart, removeFromCart } from './actions';
+import { addToCart, loadCartFromLocalStorage, removeFromCart } from './actions';
+import { getItem } from '../../utils';
 
 export interface Cart {
   id: string | number;
@@ -30,6 +31,10 @@ const cartStore = createSlice({
     builder.addCase(removeFromCart, (state, { payload }) => {
       state.cart = payload;
       state.count -= 1;
+    });
+    builder.addCase(loadCartFromLocalStorage, (state, { payload }) => {
+      state.cart = payload;
+      state.count = payload.length;
     });
   },
 });

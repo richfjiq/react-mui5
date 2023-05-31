@@ -3,6 +3,7 @@ import { RootState, useAppDispatch, useAppSelector } from '../';
 import {
   addToCart as addToCartAction,
   removeFromCart as removeFromCartAction,
+  loadCartFromLocalStorage as loadCartFromLocalStorageAction,
 } from './actions';
 import { useCallback } from 'react';
 import { Cart } from './reducer';
@@ -27,9 +28,18 @@ export const useCart = () => {
     },
     [dispatch]
   );
+
+  const loadCartFromLocalStorage = useCallback(
+    (cart: Cart[]) => {
+      dispatch(loadCartFromLocalStorageAction(cart));
+    },
+    [dispatch]
+  );
+
   return {
     ...cartState,
     addToCart,
     removeFromCart,
+    loadCartFromLocalStorage,
   };
 };

@@ -21,7 +21,7 @@ export const Cart: FC<CartComponentProps> = ({
   handleStateViewDrawer,
 }) => {
   const { cart } = useCart();
-  cart;
+
   return (
     <Drawer anchor={'right'} open={open}>
       <Box sx={{ width: '25em', p: 2 }}>
