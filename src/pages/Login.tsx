@@ -17,8 +17,8 @@ type LoginType = {
   password: string;
 };
 
-export const Login: FC = () => {
-  const { getError, getSuccess } = useNotification();
+const Login: FC = () => {
+  const { getSuccess } = useNotification();
   const {
     handleSubmit,
     handleChange,
@@ -92,3 +92,5 @@ export const Login: FC = () => {
     </Container>
   );
 };
+
+export default Login;
