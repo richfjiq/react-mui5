@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@mui/material';
 
-export const CharacterPage: FC = () => {
+const CharacterPage: FC = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState<Character>();
   const [loading, setLoading] = useState(true);
@@ -75,3 +75,5 @@ export const CharacterPage: FC = () => {
     </Box>
   );
 };
+
+export default CharacterPage;
