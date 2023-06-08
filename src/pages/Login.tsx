@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react';
+import { FC } from 'react';
 import {
   Box,
   Button,
@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import { useNotification } from '../context';
 import { loginValidate } from '../utils';
+import { useFormik } from 'formik';
 
 type LoginType = {
   username: string;
@@ -18,29 +19,22 @@ type LoginType = {
 
 export const Login: FC = () => {
   const { getError, getSuccess } = useNotification();
-  const [loginData, setLoginData] = useState<LoginType>({
-    username: '',
-    password: '',
+  const {
+    handleSubmit,
+    handleChange,
+    values: { username, password },
+    errors,
+    touched,
+  } = useFormik<LoginType>({
+    initialValues: {
+      username: '',
+      password: '',
+    },
+    validationSchema: loginValidate,
+    onSubmit: (values) => {
+      getSuccess(JSON.stringify(values));
+    },
   });
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setLoginData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    loginValidate
-      .validate(loginData)
-      .then(() => {
-        getSuccess(JSON.stringify(loginData));
-      })
-      .catch((error) => {
-        getError(error.message);
-      });
-  };
 
   return (
     <Container maxWidth="sm">
@@ -66,7 +60,10 @@ export const Login: FC = () => {
                 fullWidth
                 label="Username"
                 sx={{ mt: 2, mb: 1.5 }}
+                value={username}
                 onChange={handleChange}
+                error={touched.username && Boolean(errors.username)}
+                helperText={touched.username && errors.username}
               />
               <TextField
                 margin="normal"
@@ -75,7 +72,10 @@ export const Login: FC = () => {
                 fullWidth
                 label="Password"
                 sx={{ mt: 2, mb: 1.5 }}
+                value={password}
                 onChange={handleChange}
+                error={touched.password && Boolean(errors.password)}
+                helperText={touched.password && errors.password}
               />
               <Button
                 type="submit"
